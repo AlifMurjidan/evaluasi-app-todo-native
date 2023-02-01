@@ -1,28 +1,7 @@
 <?php
 
-require 'function.php';
-require 'koneksi.php';
+include 'koneksi.php';
 
-// if ( isset($_POST["login"])) {
-
-// 	$username = $_POST["nama"];
-// 	$password = $_POST["password"];
-
-// 	$result = mysqli_query($koneksi, "SELECT * FROM user WHERE nama = '$nama'");
-
-// 	// cek username
-// 	if ( mysqli_num_rows($result) ===1 ) {
-
-// 		// cek password
-// 		$row = mysqli_fetch_assoc($result);
-// 	if (password_verify($password, $row["password"]) ) {
-// 		// set session
-// 		$_SESSION["login"] = true;
-// 			header("Location: index.php");
-// 			exit;
-// 		}
-// 	}
-// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,26 +13,15 @@ require 'koneksi.php';
 </head>
 <body>
 <main>
-<?php 
-	if(isset($_GET['pesan'])){
-		if($_GET['pesan'] == "gagal"){
-			echo "Login gagal! nama dan password salah!";
-		}else if($_GET['pesan'] == "logout"){
-			echo "Anda telah berhasil logout";
-		}else if($_GET['pesan'] == "belum_login"){
-			echo "Anda harus login ";
-		}
-	}
-	?>
-<form method="post" action="ceklogin.php">
+<form action="proses-login.php" method="post">
         <h1>FORM LOGIN</h1>
         <div>
-            <label for="nama">Username :</label>
-            <input type="text" name="nama" id="nama">
+            <label for="email">Email :</label>
+            <input type="text" name="email" id="email" placeholder="Silahkan Masukkan Email Anda">
         </div>
         <div>
             <label for="password">Password :</label>
-            <input type="password" name="password" id="password">
+            <input type="password" name="password" id="password" placeholder="Silahkan Masukkan Password Anda">
         </div>
         <section>
             <button type="submit">Login</button>

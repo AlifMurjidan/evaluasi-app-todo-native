@@ -1,7 +1,6 @@
 <?php
 
 require 'koneksi.php';
-include 'proses.php';
 
 ?>
 
@@ -15,27 +14,40 @@ include 'proses.php';
 </head>
 <body>
 <main>
-<div class=".container-sm">
-        <?php
-        if (isset($_POST['add'])){
-            if($_POST['add']=='berhasil'){
-                echo "='alert alert-success'>Tambah Todo Berhasil";
-            }elseif($_GET['add']=='gagal'){
-                echo "='alert alert-danger'>Tambah Todo Gagal";
-            }
-            }
-        ?>
         <h1>TAMBAH TODO</h1>
-        <form method="post">
+        <form method="post" action="tambah.php" name="insert">
         <div>
-            <label for="todo">Todo :</label>
-            <input type="text" name="todo" id="todo">
+            <label for="todoo">Todo :</label>
+            <input type="text" name="todoo" id="todoo">
         </div>
+        <div class="form-group">
+                  <label for="">Status</label>
+                  <select class="form-control" name="status">
+                    <?php if ($konten['status'] == "Sedang dikerjakan") { ?>
+                        <option value="Sedang dikerjakan">Sedang dikerjakan</option>
+                        <option value="Selesai">Selesai</option>
+                    <?php }else { ?>
+                        <option value="Sedang dikerjakan">Sedang dikerjakan</option>
+                        <option selected value="Selesai">Selesai</option>
+                    <?php } ?>
+                  </select>
+                </div>
         <br>
         <button type="submit" class="btn btn-primary" name="add">Tambah</button>
         </br>
+        <?php 
+        if(isset($_POST['add'])) {
+        $todoo = $_POST['todoo'];
+        $status = $_POST['status'];
+
+        // memasukan data
+        $result = mysqli_query($koneksi,"INSERT INTO todo(todoo,status)values('$todoo','$status')");
+        echo 
+            header("location:index.php?tambah=berhasil");
+        }
+        ?>
     </form>
-        </div>
+    
 </main>
 </body>
 </html>

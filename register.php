@@ -1,16 +1,24 @@
 <?php
 
-require 'function.php';
-if ( isset($_POST["register"]) ) {
-    if ( registrasi($_POST) > 0 ) {
-        echo "<script>
-                alert('user baru berhasil ditambahkan!');
-              </script>";
-    } else {
-        echo mysqli_error($conn2);
-    }
-}
+require 'koneksi.php';
 
+session_start();
+
+if (isset($_POST['nama']) && isset($_POST['password'])){
+    $nama = htmlEntities($_POST['nama'],ENT_QUOTES);
+    $email = htmlEntities($_POST['email'],ENT_QUOTES);
+    $password = md5(htmlEntities($_POST['password'],ENT_QUOTES));
+
+    $query = "INSERT INTO `user` (nama, email, password) VALUES ('$nama', '$email','$password')";
+    $result = mysqli_query($koneksi, $query);
+    if($result){
+       header("Location:login.php");
+    }
+    else
+    {
+        echo "Maaf, Anda gagal melakukan registrasi!!!";
+    }    
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +31,7 @@ if ( isset($_POST["register"]) ) {
 </head>
 <body>
 <main>
-    <form action="register.php" method="post">
+    <form action="register.php" method="POST">
         <h1>FORM REGISTRASI</h1>
         <div>
             <label for="nama">Username :</label>

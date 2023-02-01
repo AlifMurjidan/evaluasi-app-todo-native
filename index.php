@@ -1,7 +1,6 @@
 <?php
 
 require 'koneksi.php';
-require 'proses.php';
 
 ?>
 
@@ -32,13 +31,13 @@ require 'proses.php';
                 $jumlah = mysqli_num_rows($query);
                 while ($data = mysqli_fetch_assoc($query)){
                     $Id = $data['id_todo'];
-                    $Todo = $data['todo'];
+                    $Todoo = $data['todoo'];
                     $Status = $data['status'];
                 
                 ?>
                 <tr>
                     <td><?= $Id ?></td>
-                    <td><?= $Todo ?></td>
+                    <td><?= $Todoo ?></td>
                     <td><?= $Status ?></td>
                     <td>
                     <form method="post">
@@ -55,5 +54,16 @@ require 'proses.php';
             <button class="btn btn-primary">Tambah Todo</button>
             </a>
             <a href="logout.php">Logout</a>
+
+            <?php if (isset($_POST['hapus'])){
+    $Id = $_POST['Id_todo'];
+    $hapus = mysqli_query($koneksi, "DELETE from todo where Id_todo=$Id");
+    if($hapus){
+        header("location:index.php?hapus=berhasil");
+        }else{  
+            header("location:index.php?hapus=gagal");
+    }
+}
+?>
 </body>
 </html>

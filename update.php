@@ -1,9 +1,25 @@
 <?php
 
-require 'koneksi.php';
-include 'proses.php';
+include_once 'koneksi.php';
+if (isset($_POST['update'])) {
+    $Id = $_POST['Id_todo'];
+    $Todoo = $_POST['todoo'];
+    $Status = $_POST['status'];
+    $result = mysqli_query($koneksi, "UPDATE todo SET todoo='$Todoo', status='$Status' WHERE Id_todo=$Id");
+    header("location:index.php");
+}
 
 ?>
+
+<?php
+        $Id = $_GET['Id_todo'];
+        $query = mysqli_query($koneksi, "SELECT * FROM todo WHERE Id_todo=$Id");
+        while($data = mysqli_fetch_assoc($query)){
+           $Id =  $data['id_todo'];
+            $Todoo = $data['todoo'];
+            $Status = $data['status'];
+        }
+        ?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,30 +30,12 @@ include 'proses.php';
     <title>Todo</title>
 </head>
 <body>
-<main>
-<div class=".container-sm">
-        <?php
-        if(isset($_POST['edit'])){
-            if($_POST['edit']=='berhasil'){
-                echo "<div class='alert alert-success'>Ubah Todo Berhasil</div>";
-            }else if($_GET['edit']=='gagal'){
-                echo "<div class='alert alert-danger'>Ubah Todo Produk Gagal</div>";
-            }
-        }
-        ?>
-        <?php
-        $Id = $_GET['Id_todo'];
-        $query = mysqli_query($koneksi, "SELECT * FROM todo WHERE Id_todo=$Id");
-        while($data = mysqli_fetch_array($query)){
-            $Todo = $data['todo'];
-            $Status = $data['status'];
-        }
-        ?>
+<main> 
         <h1>UPDATE TODO</h1>
-        <form method="post">
+        <form method="post" action="update.php" name="update">
         <div>
-            <label for="todo">Todo :</label>
-            <input type="text" value="<?= $Todo ?>" name="todo">
+            <label for="todoo">Todo :</label>
+            <input type="text" value="<?= $Todoo ?>" name="todoo">
         </div>
         <div class="form-group">
                   <label for="">Status</label>
@@ -51,7 +49,10 @@ include 'proses.php';
                     <?php } ?>
                   </select>
                 </div>
-                <button type="submit" class="btn btn-primary" name="edit">Ubah Status</button>
+                <tr>
+                <input type="hidden" name="Id_todo" value=<?php echo $_GET['Id_todo'];?>>
+                <input type="submit" name="update" value="UPDATE">
+            </tr>
     </form>
         </div>
 </main>

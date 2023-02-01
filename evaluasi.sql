@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 31 Jan 2023 pada 05.29
+-- Waktu pembuatan: 01 Feb 2023 pada 11.06
 -- Versi server: 10.4.21-MariaDB
 -- Versi PHP: 8.0.11
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `todo` (
   `id_todo` int(11) NOT NULL,
-  `todo` varchar(55) NOT NULL,
+  `todoo` varchar(55) NOT NULL,
   `status` enum('Sedang dikerjakan','Selesai') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -37,9 +37,10 @@ CREATE TABLE `todo` (
 -- Dumping data untuk tabel `todo`
 --
 
-INSERT INTO `todo` (`id_todo`, `todo`, `status`) VALUES
-(7, 'IPA', 'Sedang dikerjakan'),
-(8, 'IPS', 'Sedang dikerjakan');
+INSERT INTO `todo` (`id_todo`, `todoo`, `status`) VALUES
+(28, 'IPA', 'Selesai'),
+(29, 'Evaluasi', 'Selesai'),
+(30, 'PAI', 'Sedang dikerjakan');
 
 -- --------------------------------------------------------
 
@@ -59,7 +60,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nama`, `email`, `password`) VALUES
-(1, 'Jidan', 'emailexample@yahoo.com', 'jidan');
+(1, 'Jidan', 'emailexample@yahoo.com', 'jidan'),
+(2, 'bagus', 'emailexample@yahoo.com', '17b38fc02fd7e92f3edeb6318e3066d8');
 
 --
 -- Indexes for dumped tables
@@ -85,13 +87,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `todo`
 --
 ALTER TABLE `todo`
-  MODIFY `id_todo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_todo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
