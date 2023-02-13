@@ -1,7 +1,7 @@
 <?php
 include 'koneksi.php';
 $email=$_POST['email'];
-$password=$_POST['password'];
+$password=md5($_POST['password']);
 
 $data=mysqli_query($koneksi,"SELECT *from user where email='$email' and password='$password'");
 

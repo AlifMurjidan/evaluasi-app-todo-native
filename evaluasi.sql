@@ -60,7 +60,6 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nama`, `email`, `password`) VALUES
-(1, 'Jidan', 'emailexample@yahoo.com', 'jidan'),
 (2, 'bagus', 'emailexample@yahoo.com', '17b38fc02fd7e92f3edeb6318e3066d8');
 
 --
